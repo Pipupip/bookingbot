@@ -1,6 +1,10 @@
-# Скопируй этот файл в config.py и вставь свои данные
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
-ADMIN_CHAT_ID = 0
+import os
+
+# На хостинге задай переменные окружения BOT_TOKEN и ADMIN_CHAT_ID
+# Локально можно вписать значения прямо сюда (они будут дефолтом)
+BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
+ADMIN_CHAT_ID = int(os.getenv("ADMIN_CHAT_ID", "0"))
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 
 SERVICES = {
     "Замена масла": "Замена масла — 1 500 руб.",
