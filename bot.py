@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import threading
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
@@ -9,12 +10,16 @@ from config import BOT_TOKEN
 from database import init
 from handlers import common, booking, reviews, admin
 from reminder import reminder_loop
+from health_server import run_health_server
 
 logging.basicConfig(level=logging.INFO)
 
 
 async def main():
     init()
+
+    thread = threading.Thread(target=run_health_server, daemon=True)
+    thread.start()
 
     bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
     dp = Dispatcher(storage=MemoryStorage())
